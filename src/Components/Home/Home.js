@@ -1,11 +1,10 @@
 import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react'
 import JokeCard from '../JokeCard/JokeCard';
 
 const Home = ({ jokes, getJokes, addJoke }) => {
-    let newJokeBtn = useRef(null)
+
 
     return (
         <div className='stackDiv'>
@@ -18,7 +17,7 @@ const Home = ({ jokes, getJokes, addJoke }) => {
                 width='100%'
                 >
                 <JokeCard jokes={jokes} addJoke={addJoke}/>
-                <Button className='new-joke-button' variant='contained' ref={el => {newJokeBtn = el}} onClick={() => getJokes()}>New Joke</Button>
+                <Button className='new-joke-button' variant='contained'  onClick={() => getJokes()}>New Joke</Button>
 
             </Stack>
         </div>
