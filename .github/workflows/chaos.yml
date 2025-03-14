@@ -7,10 +7,14 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Check Docker Status
+        run: docker info
+
       - name: Creating kind cluster
         uses: helm/kind-action@v1.0.0-rc.1
         with:
@@ -26,9 +30,11 @@ jobs:
           kubectl version
 
       - uses: actions/checkout@v2
+      
       - name: Deploy an application
         run: |
-           kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
+          kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
+
       - name: Run chaos mesh action
         uses: chaos-mesh/chaos-mesh-action@v0.5
         env:
