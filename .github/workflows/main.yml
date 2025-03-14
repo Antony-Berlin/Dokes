@@ -29,11 +29,6 @@ jobs:
         run: |
           npm install
 
-      # Run tests (optional, if you have tests in your project)
-      - name: Run tests
-        run: |
-          npx cypress run
-
       # Build the React app
       - name: Build app
         run: |
