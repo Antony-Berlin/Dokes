@@ -32,7 +32,7 @@ jobs:
       # Run tests (optional, if you have tests in your project)
       - name: Run tests
         run: |
-          npm test -- --coverage
+          npx cypress run
 
       # Build the React app
       - name: Build app
