@@ -7,24 +7,10 @@ import Home from '../Home/Home'
 import BadURL from '../BadURL/BadURL'
 import theme from '../../theme';
 import Pocket from '../Pocket/Pocket'
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+
 import './App.css';
 
-const Copyright = () => {
-  return (
-    <Typography variant="body2" color="#FFCB5F" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/thomedpete/Dokes">
-        Dokes
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const App = () => {
 

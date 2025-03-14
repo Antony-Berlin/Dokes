@@ -5,8 +5,7 @@ import React, { useRef } from 'react'
 import JokeCard from '../JokeCard/JokeCard';
 
 const Home = ({ jokes, getJokes, addJoke }) => {
-    let newJokeBtn = useRef(null)
-    let tl = useRef(null)
+˘
 
     return (
         <div className='stackDiv'>
