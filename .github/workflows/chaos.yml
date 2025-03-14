@@ -1,4 +1,4 @@
-name: Chaos Testing
+name: Chaos
 
 on:
   push:
@@ -9,39 +9,39 @@ on:
       - main
 
 jobs:
-  chaos-test:
-    runs-on: self-hosted  # Ensure it runs on the self-hosted runner
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Install Kind
-        run: |
-          kind create cluster --name chaos-cluster --image kindest/node:v1.24.0
+      - name: Check Docker Status
+        run: docker info
 
-      - name: Install Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - name: Creating kind cluster
+        uses: helm/kind-action@v1.0.0-rc.1
+        with:
+          node_image: kindest/node:v1.24.0
 
-      - name: Install Chaos Mesh
+      - name: Print cluster information
         run: |
-          kubectl create ns chaos-mesh
-          helm repo add chaos-mesh https://charts.chaos-mesh.org
-          helm repo update
-          helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
+          kubectl config view
+          kubectl cluster-info
+          kubectl get nodes
+          kubectl get pods -n kube-system
+          helm version
+          kubectl version
 
-      - name: Wait for Chaos Mesh to be Ready
-        run: |
-          kubectl wait --for=condition=available --timeout=600s deployment/chaos-controller-manager -n chaos-mesh
-
-      - name: Deploy Test Application
+      - uses: actions/checkout@v2
+      
+      - name: Deploy an application
         run: |
           kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
 
-      - name: Run Chaos Experiment
-        uses: chaos-mesh/chaos-mesh-action@v0.5
+      - name: Run chaos mesh action
+        uses: chaos-mesh/chaos-mesh-action@v1.0.0
         env:
           CHAOS_MESH_VERSION: v1.0.0
           CFG_BASE64: YXBpVmVyc2lvbjogY2hhb3MtbWVzaC5vcmcvdjFhbHBoYTEKa2luZDogTmV0d29ya0NoYW9zCm1ldGFkYXRhOgogIG5hbWU6IG5ldHdvcmstZGVsYXkKICBuYW1lc3BhY2U6IGJ1c3lib3gKc3BlYzoKICBhY3Rpb246IGRlbGF5ICMgdGhlIHNwZWNpZmljIGNoYW9zIGFjdGlvbiB0byBpbmplY3QKICBtb2RlOiBhbGwKICBzZWxlY3RvcjoKICAgIHBvZHM6CiAgICAgIGJ1c3lib3g6CiAgICAgICAgLSBidXN5Ym94LTAKICBkZWxheToKICAgIGxhdGVuY3k6ICIxMG1zIgogIGR1cmF0aW9uOiAiNXMiCiAgc2NoZWR1bGVyOgogICAgY3JvbjogIkBldmVyeSAxMHMiCiAgZGlyZWN0aW9uOiB0bwogIHRhcmdldDoKICAgIHNlbGVjdG9yOgogICAgICBwb2RzOgogICAgICAgIGJ1c3lib3g6CiAgICAgICAgICAtIGJ1c3lib3gtMQogICAgbW9kZTogYWxsCg==
 
-      - name: Verify Experiment
+      - name: Verify
         run: |
-          echo "Verifying Chaos Mesh experiment"
-          kubectl get pods -n chaos-mesh
+          echo "do some verification"
+          kubectl exec busybox-0 -it -n busybox -- ping -c 30 busybox-1.busybox.busybox.svc
