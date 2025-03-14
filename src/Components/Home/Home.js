@@ -17,7 +17,7 @@ const Home = ({ jokes, getJokes, addJoke }) => {
                 width='100%'
                 >
                 <JokeCard jokes={jokes} addJoke={addJoke}/>
-                <Button className='new-joke-button' variant='contained'  onClick={() => getJokes()}>New Joke</Button>
+                <Button className='new-joke-button' variant='contained'  onClick={() => getJokes()}>New dad Joke</Button>
 
             </Stack>
         </div>
