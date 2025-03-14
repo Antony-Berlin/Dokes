@@ -1,0 +1,26 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width:100%
+  
+}
+
+.logo-container {
+  width: 100%;
+}
+
+.dadLogo {
+  align-self: center;
+}
+
+.dokes {
+  stroke: yellow;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.copyright {
+  color: #FFCB5F;
+}
