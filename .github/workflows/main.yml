@@ -5,9 +5,7 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 permissions:
   contents: write
 
@@ -16,27 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Set your desired Node version
+          node-version: '16' 
 
-      # Install dependencies
       - name: Install dependencies
         run: |
           npm install
 
-      # Build the React app
       - name: Build app
         run: |
           npm run build
-
-      # Optionally deploy the app (e.g., deploy to GitHub Pages or another service)
+    # //coments
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
