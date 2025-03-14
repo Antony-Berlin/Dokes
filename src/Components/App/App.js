@@ -74,17 +74,7 @@ const App = () => {
         </Routes>
       </div>
 
-      <Box sx={{ bgcolor: '#000', p: 2, color: '#FFCB5F' }} component="footer">
-        <Copyright />
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="#FFCB5F"
-          component="p"
-        >
-          Dad Joke Generator by T.I.M.
-        </Typography>
-      </Box>
+     
     </ThemeProvider>
   );
 }

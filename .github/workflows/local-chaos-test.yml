@@ -1,0 +1,48 @@
+name: Local Chaos Testing
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  chaos-test:
+    runs-on: self-hosted # Uses the local runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+
+      - name: Deploy Application Locally
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+          kubectl rollout status deployment/my-app
+
+      - name: Install LitmusChaos Locally
+        run: |
+          kubectl apply -f https://litmuschaos.github.io/litmus/litmus-operator-v3.yaml
+          sleep 30
+
+      - name: Apply Chaos Experiment
+        run: |
+          kubectl apply -f chaos-experiment.yaml
+
+      - name: Wait for Chaos Test
+        run: sleep 60
+
+      - name: Verify Application Stability
+        run: |
+          kubectl get pods -n default
+          kubectl describe pods -l app=my-app
+
+      - name: Cleanup Chaos Experiment
+        run: |
+          kubectl delete -f chaos-experiment.yaml
