@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.1d493284.css",
-    "main.js": "/static/js/main.681d25e6.js",
-    "static/media/Anton-Regular.ttf": "/static/media/Anton-Regular.170b842f9a8cd6150a0d.ttf",
-    "static/media/dadJoke-background1.png": "/static/media/dadJoke-background1.0823e5a5765f7f55ef93.png",
-    "static/media/noise.png": "/static/media/noise.ab6b585dfc971c8e5b30.png",
-    "static/media/DADJOKE.png": "/static/media/DADJOKE.67ec457119e3987e0b9c.png",
-    "index.html": "/index.html",
-    "main.1d493284.css.map": "/static/css/main.1d493284.css.map",
-    "main.681d25e6.js.map": "/static/js/main.681d25e6.js.map"
+    "main.css": "/Dokes/static/css/main.b8c104eb.css",
+    "main.js": "/Dokes/static/js/main.3f43dc35.js",
+    "static/media/Anton-Regular.ttf": "/Dokes/static/media/Anton-Regular.170b842f9a8cd6150a0d.ttf",
+    "static/media/dadJoke-background1.png": "/Dokes/static/media/dadJoke-background1.0823e5a5765f7f55ef93.png",
+    "static/media/noise.png": "/Dokes/static/media/noise.ab6b585dfc971c8e5b30.png",
+    "static/media/DADJOKE.png": "/Dokes/static/media/DADJOKE.67ec457119e3987e0b9c.png",
+    "index.html": "/Dokes/index.html",
+    "main.b8c104eb.css.map": "/Dokes/static/css/main.b8c104eb.css.map",
+    "main.3f43dc35.js.map": "/Dokes/static/js/main.3f43dc35.js.map"
   },
   "entrypoints": [
-    "static/css/main.1d493284.css",
-    "static/js/main.681d25e6.js"
+    "static/css/main.b8c104eb.css",
+    "static/js/main.3f43dc35.js"
   ]
 }
