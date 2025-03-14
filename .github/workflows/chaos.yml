@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Creating kind cluster
         uses: helm/kind-action@v1.0.0-rc.1
+        with:
+          node_image: kindest/node:v1.24.0
 
       - name: Print cluster information
         run: |
